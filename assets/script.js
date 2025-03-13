@@ -1,19 +1,22 @@
-let sliderWidth = document.querySelector('.slider--width')
+let sliderWidth = document.querySelector('.slider--width');
 let sliderItems = document.querySelectorAll('.slider--item').length;
 
-let controlLeft = 0;
-let controlRight = 0;
+let controlIndex = 0;
+let direction = 1;
 
-sliderWidth.style.width = `calc(${sliderItems * 100}vw)`
+sliderWidth.style.width = `calc(${sliderItems * 100}vw)`;
 
-function sliderMarginLeft() {
-    controlLeft++;
-    if (controlLeft < sliderItems) {
-        sliderWidth.style.marginLeft = `-${controlLeft * 100}vw`
-        setInterval(sliderMarginLeft, 1000)
+function sliderToggle() {
+    controlIndex += direction;
+
+    if (controlIndex === sliderItems - 1 || controlIndex === 0) {
+        direction *= -1;
     }
-}
-function slideMarginRight() {
 
+    sliderWidth.style.marginLeft = `-${controlIndex * 100}vw`;
+    console.log('ControlIndex = ' + controlIndex);
+    console.log('Direction = ' + direction);
 }
-sliderMarginLeft
+
+setInterval(sliderToggle, 3000);
+
